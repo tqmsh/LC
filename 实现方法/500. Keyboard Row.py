@@ -6,6 +6,7 @@ class Solution:
         ans = []
         for w in words:
             # .lower() 模版
+            # set 模版
             s = set(w.lower()) #🟥小心大小写#
             a, b, c = 0, 0, 0
             for x in s: 
