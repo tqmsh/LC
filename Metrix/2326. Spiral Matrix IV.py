@@ -5,7 +5,7 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
+# 链表 模版
 def array_to_linked_list(arr):
     if not arr:
         return None
@@ -15,6 +15,14 @@ def array_to_linked_list(arr):
         current.next = ListNode(value)
         current = current.next
     return head
+
+
+def print_linked_list(head):
+    current = head
+    while current:
+        print(current.val, end=" -> " if current.next else "\n")
+        current = current.next
+
 
 class Solution:
     def spiralMatrix(self, m: int, n: int, head: Optional[ListNode]) -> List[List[int]]:

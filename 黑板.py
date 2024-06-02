@@ -1,46 +1,42 @@
-from typing import List
-from collections import Counter
-from typing import Optional
-from collections import defaultdict
+from typing import List 
+from typing import Optional 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
-    def spiralMatrixIII(self, rows: int, cols: int, rStart: int, cStart: int) -> List[List[int]]: 
-        cnt = 0
-        vis, len, ans = 1, 1, []
-        dir, curDir = [(0, 1), (1, 0), (0, -1), (-1, 0)], 0
-        curR, curC = rStart, cStart
-        ans.append([curR, curC])
-
-        # BFS
-        while vis < rows * cols and cnt < 20:
-
-            # 扩展 
-            dx, dy = dir[curDir]
-            # 走几步
-            for i in range(len):   
-                nxtR, nxtC = curR + dx, curC + dy 
-
-                # 进门
-                if (0 <= nxtR < rows) and (0 <= nxtC < cols): 
-                    vis += 1
-                    ans.append([nxtR, nxtC]) 
-                curR = nxtR
-                curC = nxtC
-            
-            # 每换两次方向，就多走一步，改变下次扩展方法
-            curDir = (curDir + 1) % 4
-            if curDir % 2 == 0:
-                len += 1
-        return ans
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int: 
+        # 初始化
+        if not root: return 0
+        # 状态转移 
+        if low <= root.val <= high: return root.val + self.rangeSumBST(root.left, low, high) + self.rangeSumBST(root.right, low, high) 
+        elif root.val < low:
+            # x < low, L < x => L < low，跳过
+            return self.rangeSumBST(root.right, low, high)
+        elif root.val > high:
+             return self.rangeSumBST(root.left, low, high)
+def insertIntoBST(root: Optional[TreeNode], val: int) -> TreeNode:
+    if root is None:
+        return TreeNode(val)
+    if val < root.val:
+        root.left = insertIntoBST(root.left, val)
+    else:
+        root.right = insertIntoBST(root.right, val)
+    return root
  
-         
+def buildBST(values: List[int]) -> Optional[TreeNode]:
+    root = None
+    for value in values:
+        root = insertIntoBST(root, value)
+    return root
+ 
 def main():
-    solution = Solution()  
-    rows = 1
-    cols = 4
-    rStart = 0
-    cStart = 0
-    out = solution.spiralMatrixIII(rows, cols, rStart, cStart)
-    print(out) 
-
+    root = [10,5,15,3,7,13,18,1,6]
+    low = 6; high = 10
+    root = buildBST(root)
+    solution = Solution()
+    subtree = solution.rangeSumBST(root, low, high)
+    print(subtree)
 if __name__ == "__main__":
     main()

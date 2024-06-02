@@ -4,7 +4,7 @@ from collections import defaultdict
 
 class Solution: 
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # defaultdict 模版
+        # dict 模版
         mp = defaultdict(list)
         for x in strs:
             # sorted 模版
