@@ -39,8 +39,7 @@ def print_bst(node, level=0, label='.'):
         print_bst(node.right, level + 1, 'R')
     else:
         print(f"{indent}-{label}: None")
-
-# 模版 BT
+ 
 def build_BT(arr):
     if not arr:
         return None
