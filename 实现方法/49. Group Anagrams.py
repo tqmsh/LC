@@ -3,8 +3,7 @@ from collections import Counter
 from collections import defaultdict
 
 class Solution: 
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # dict 模版
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]: 
         mp = defaultdict(list)
         for x in strs:
             # sorted 模版

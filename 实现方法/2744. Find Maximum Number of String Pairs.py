@@ -1,8 +1,7 @@
 from typing import List
 
 class Solution:
-    def maximumNumberOfStringPairs(self, words: List[str]) -> int: 
-        # map 模版
+    def maximumNumberOfStringPairs(self, words: List[str]) -> int:  
         mp = {}  
         ans = 0
         for x in words:
