@@ -27,7 +27,7 @@ class Solution:
         
         def dfs(u, cur, sum):   
             
-            # 进门后录，进队/门方法很多，出队/门就一种，好写; 这里，进门 = u.l/r, 出门 = u; 处理 u
+            # 出门后录，进队/门方法很多，出队/门就一种，好写; 这里，进门 = u.l/r, 出门 = u; 处理 u
 
             if not u: return 
 

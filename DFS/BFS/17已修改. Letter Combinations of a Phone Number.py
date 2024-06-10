@@ -17,7 +17,7 @@ from collections import deque
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         # dict 模版 
-        mp = {
+        digit_to_letters = {
             '2': ['a', 'b', 'c'],
             '3': ['d', 'e', 'f'],
             '4': ['g', 'h', 'i'],
@@ -27,37 +27,35 @@ class Solution:
             '8': ['t', 'u', 'v'],
             '9': ['w', 'x', 'y', 'z'] 
         }
-        ans = [] 
-        def dfs(id, cur):   
-            if id >= len(digits):
-                ans.append(cur)
+        combinations = [] 
+        def dfs(current_idx, current_combination):   
+            if current_idx >= len(digits):
+                combinations.append(current_combination)
                 return 
 
-            for x in mp[digits[id]]: 
-                dfs(id + 1, cur + x) 
+            for letter in digit_to_letters[digits[current_idx]]: 
+                dfs(current_idx + 1, current_combination + letter) 
 
         if digits == "": return [] # 基无法转移  
-        dfs(0, "")  
+        dfs(0, "") # 出门处理 (0 的东西)
 
         # bfs
-        ans = [] 
+        combinations = [] 
 
-        q = deque()  
+        queue = deque([(0, "")])  
         def bfs():
-            while q:
-                id, cur= q.popleft()
-                if id >= len(digits):
-                    ans.append(cur)
+            while queue:
+                current_idx, current_combination = queue.pop() 
+                if current_idx >= len(digits):
+                    combinations.append(current_combination)
                     continue
                 
-                for x in mp[digits[id]]:  
-                    q.append((id + 1, cur + x)) # 维持下一个dfs在填的坑可选的信息 [id + 1, len)
+                for letter in digit_to_letters[digits[current_idx]]: 
+                    queue.extend([(current_idx + 1, current_combination + letter)])  
                     
-        if digits == "": return [] # 基无法转移  
-        q.append((0, ""))   
-        
+        if digits == "": return [] # 基无法转移   
         bfs()
-        return ans 
+        return combinations 
     
 def main(): 
     solution = Solution() 
