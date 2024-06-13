@@ -23,23 +23,6 @@ class Solution:
                 current_run.pop() # backtrack 
 
         dfs(0, [], 0) 
-
-        # bfs
-        combinations = []
-        queue = deque([(0, [], 0)])  
-        def bfs():
-            while queue:
-                current_idx, current_run, current_sum = queue.pop()
-                if current_sum == target: 
-                    combinations.append(current_run.copy())
-                    continue  
-                
-                if current_idx >= len(candidates) or current_sum > target: 
-                    continue
-                
-                for i in range(current_idx, len(candidates)): 
-                    queue.extend([(i, current_run + [candidates[i]], current_sum + candidates[i])]) 
-        bfs()
         return combinations 
     
 def main(): 
