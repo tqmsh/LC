@@ -3,8 +3,7 @@ from typing import List
 from collections import deque
 
 class Solution: 
-    def combinationSum4(self, nums: List[int], target: int) -> int:
-        # dp 模版
+    def combinationSum4(self, nums: List[int], target: int) -> int: 
         dp = [0] * (target + 10)
 
         # 基

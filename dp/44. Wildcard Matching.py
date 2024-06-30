@@ -6,6 +6,7 @@ class Solution:
         s = " " + s
         p = " " + p
 
+        # dp 初始化 模版
         dp = [[0] * (len(p)) for _ in range(len(s))]
         dp[0][0] = 1
 
