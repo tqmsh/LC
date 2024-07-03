@@ -21,6 +21,7 @@ class Solution:
         inn = [0] * numCourses
         e = [[] for _ in range(numCourses)]
         
+        # edge 模版
         for x in prerequisites:
             e[x[1]].append(x[0])
             inn[x[0]] += 1
