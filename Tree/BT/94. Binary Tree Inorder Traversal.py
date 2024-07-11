@@ -7,8 +7,7 @@ class TreeNode:
         self.right = right
   
 class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        # stk 模版
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]: 
         ans = []; stk = []; tmp = root #🟥ans = stk = [] 不可，因为地址一致
         while stk or tmp:
 

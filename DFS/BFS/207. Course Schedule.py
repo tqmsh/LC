@@ -44,10 +44,8 @@ class Solution:
         
         # return numCourses == vis
     
-        # dfs  
-
-        vis = [0] * numCourses  
-
+        # dfs   
+        vis = [0] * numCourses   
         # u 子树存不存在倒流
         def dfs(u):
             if vis[u] == 1: return False # 已查，树合法无环

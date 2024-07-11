@@ -13,6 +13,7 @@ class Solution:
             for j in range(i, len(s)): # 区间枚举 
                 # 小写 大写 模版
                 if (s_b[j] >= ord('a')): # 小写 
+                    # ord 模版
                     l |= 1 << (s_b[j] - ord('a')) # 录 x
                 else:
                     u |= 1 << (s_b[j] - ord('A'))  

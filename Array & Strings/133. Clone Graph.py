@@ -51,7 +51,9 @@ def display_adj_list(node: 'Node'):
             return
         visited.add(n.val)
         for neighbor in n.neighbors:
+            print(adj_list[n.val])
             adj_list[n.val].append(neighbor.val)
+            print(adj_list[n.val])
             dfs(neighbor)
 
     dfs(node)
