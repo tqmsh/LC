@@ -28,14 +28,13 @@ class Solution:
         # 必然不会正的给 j cnt -= 1, 因为其被 j 负了，而 i 必然慢 j 一步，
         # i 必然不可能 mp += 1 吧其变正，从而 cnt += 1, 破坏 [i, j] 合法区间
         while j < len(s):
-            # 把 j 移至第一个合法
+            # 如果当下位置需要包含，将 j++，j会停在第一个不需要的地方
             if mp[s[j]] > 0: cnt -= 1 
             mp[s[j]] -= 1   
             j += 1    
-            while cnt == 0: # [i， j] 合法 
-                # 录最小 
-                if j - i < mn:
-                    print(i, j)
+            while cnt == 0: # [i， j) 合法 
+                # 录最小   
+                if j - i < mn: 
                     mn = j - i
                     ans = i 
                 # i 右移一位，移至第一不合法
@@ -50,8 +49,8 @@ class Solution:
                     
 def main():
     solution = Solution()  
-    s = "ADOBECODEBANC"; t = "ABC"
-    out = solution.minWindow(s, t)
+    S = "abcdebdde"; T = "bde"
+    out = solution.minWindow(S, T)
     print(out) 
 
 if __name__ == "__main__":

@@ -21,7 +21,7 @@ class Solution:
      
 
     # # lb, up 模版
-    # def lower_bound(arr, target): # 第一 >= x
+    # def lower_bound(arr, target): # 第一 <= x
     #     return bisect.bisect_left(arr, target)
 
     # def upper_bound(arr, target): # 第一 > x

@@ -24,8 +24,8 @@ class Solution:
             for l_sum in l_arr[k]:
                 # 枚举一半，直接算另一半
                 req_r_sum = req_sum - l_sum
-                id = bisect_left(r_arr[max(0, n - k)], req_r_sum) # 第一 <= req_r_sum 的, 长n - k的 r 子集和
-                for i in [id - 1, id]: # 第一 <= - 1，req_r_sum， 第一 <=，两个等长的合法子集
+                id = bisect_left(r_arr[max(0, n - k)], req_r_sum) # 第一 >= req_r_sum 的, 长n - k的 r 子集和
+                for i in [id - 1, id]: # 如果 = 的情况不存在，那么我们需要去查看 第一 > 1 以及 第一 < 1 的结果
                     if i < 0 or i >= len(r_arr[max(0, n - k)]): continue
                     r_sum = r_arr[max(0, n - k)][i]
                     ans = min(ans, abs(2 * l_sum + 2 * r_sum - tot))
