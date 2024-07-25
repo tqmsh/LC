@@ -4,9 +4,36 @@ class ListNode:
         self.val = val
         self.next = next
         self.pre = pre
-class DoublyLinkedList:
+# DLL 模版 
+class DLL:
     def __init__(self):
         self.head = None
+
+    # Merge Sort
+    def _split(self, node: ListNode):
+        s = f = node
+        while f and f.next and f.next.next:
+            f = f.next.next
+            s = s.next
+        ans = s.next # s: mid; s,nxt: 后半段开头
+        s.next = None
+        return ans
+    def _merge(self, fir, sec): 
+        if not fir: return sec
+        if not sec: return fir
+        if fir.val > sec.val: fir, sec = sec, fir # wlog, fir <= sec
+        fir.next = self._merge(fir.next, sec)
+        fir.next.pre = fir
+        fir.pre = None
+        return fir 
+    def _merge_sort(self, fir):
+        if fir is None or fir.next is None: return fir 
+        sec = self._split(fir)
+        fir = self._merge_sort(fir)
+        sec = self._merge_sort(sec) 
+        return self._merge(fir, sec)
+    def sort(self):
+        self.head = self._merge_sort(self.head)
     def insert_front(self, val):
         node = ListNode(val)
         node.next = self.head
@@ -32,22 +59,16 @@ class DoublyLinkedList:
         if delete_node == self.head: self.head = delete_node.next 
         if delete_node.pre: delete_node.pre.next = delete_node.next # L <-> delete_node <-> R => L <-> R
         if delete_node.next: delete_node.next.pre = delete_node.pre
-        gc.collect # free memory
+        gc.collect # free memory 
     def display_list(self, node):
         while node:
-            print(node.val, end = " -> ")
-            L = node
-            node = node.next 
-    def push_array(self, arr):
-        for val in arr:
-            self.insert_end(val)
-d_linked_list = DoublyLinkedList() 
-d_linked_list.insert_end(5)
-d_linked_list.insert_front(1)
-d_linked_list.insert_front(6)
-d_linked_list.insert_end(9)  
-d_linked_list.insert_after(d_linked_list.head, 11) 
-d_linked_list.insert_after(d_linked_list.head.next, 15) 
-d_linked_list.display_list(d_linked_list.head) 
-d_linked_list.delete_node(d_linked_list.head.next.next.next.next.next) 
-d_linked_list.display_list(d_linked_list.head)
+            print(node.val, end=" -> ")
+            node = node.next
+        print("None")
+
+
+dll = DLL()
+for value in [2, 1,1,2,3,4,4,1]:
+    dll.insert_end(value)
+dll.sort()
+dll.display_list(dll.head) 

@@ -15,23 +15,23 @@ class Solution:
                 if i - x >= 0:
                     dp[i] += dp[i - x]
 
-        # 记忆化 模版
-        memo = {}
-        def dp(i):
-            if i in memo:
-                return memo[i]
+        # # 记忆化 模版
+        # memo = {}
+        # def dp(i):
+        #     if i in memo:
+        #         return memo[i]
             
-            if i == 0: return 1
+        #     if i == 0: return 1
 
-            val = 0 
-            for x in nums: 
-                if i - x >= 0:
-                    val += dp(i - x)
+        #     val = 0 
+        #     for x in nums: 
+        #         if i - x >= 0:
+        #             val += dp(i - x)
             
-            memo[i] = val
-            return val
+        #     memo[i] = val
+        #     return val
         
-        return dp(target)
+        return dp[target]
 def main(): 
     solution = Solution()  
     nums = [1,2,3]; target = 4
