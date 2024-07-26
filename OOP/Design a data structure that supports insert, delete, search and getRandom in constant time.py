@@ -19,6 +19,9 @@ class OOP:
     def getRandom(self):
         if not self.a: return None # 🟥 Edge Case   
         return self.a[randint(0, len(self.a) - 1)]
-
+    def retrieve(self, index):
+        if index < 0 or index >= len(self.a): return None  # or raise an exception
+        return self.a[index]
+    
 ds = OOP()  
 print(ds.getRandom())

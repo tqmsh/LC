@@ -17,9 +17,6 @@ class Solution:
         if val > node.val: return self.dfs(node.right, val)
             
         if val < node.val: return self.dfs(node.left, val)
-          
-        
-
 
 # BST 模版
 def print_bst(node, level=0, label='.'):

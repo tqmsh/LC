@@ -7,26 +7,22 @@ class TreeNode:
         self.right = right
   
 class Solution:  
-    def _dfs(self, u: TreeNode, dp, ans):
-        if not u: return 
-        self._dfs(u.left, dp, ans)
-        self._dfs(u.right, dp, ans) 
-        dp[u] = 1 + max(dp[u.left], dp[u.right])
-        ans[dp[u]].append(u.val) 
-
-    def _dfs(self, u: TreeNode, ans):
-        if not u: return 0 
-        h = 1 + max(self._dfs(u.left, ans), self._dfs(u.right, ans))
-        ans[h].append(u.val)
-        return h
+    def _dfs(self, u: TreeNode, path: int, ans: int) -> int:
+        if not u: return
+        
+        current_path = path * 10 + u.val
+        # 进门前处理，因为得用 f 的信息分类讨论
+        if u.left is None and u.right is None:
+            ans[0] += current_path
+            return 
+            
+        self._dfs(u.left, current_path, ans)
+        self._dfs(u.right, current_path, ans) 
     
-    def get_leaf(self, u: Optional[TreeNode]) -> List[int]: 
-        dp = defaultdict(int)
-        ans = defaultdict(list)
-        # self._dfs(u, dp, ans)
-        self._dfs(u, ans)
-
-        return [v for _, v in ans.items()]
+    def sumNumbers(self, u: Optional[TreeNode]) -> List[int]: 
+        ans = [0] 
+        self._dfs(u, 0, ans)
+        return ans[0]
 
 def build_BT(arr):
     if not arr:
@@ -48,8 +44,8 @@ def build_BT(arr):
 
 def main():
     solution = Solution()
-    u = build_BT([1,2,3,4,5])
-    out = solution.get_leaf(u) 
+    u = build_BT([4,9,0,None,1])
+    out = solution.sumNumbers(u) 
     print(out)
 if __name__ == "__main__":
     main()

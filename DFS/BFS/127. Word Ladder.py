@@ -21,7 +21,7 @@ class Solution:
                     res.add(cur)
         return res
 
-    def _bfs(self, beginWord, endWord, wordList, e): # 🟥 DFS 大致有两种。(1) 填坑，step = 当前填哪一个坑，cur = [1, step) 的结果。(2) 走图, x = 现在在哪个坐标，e = [1, x], e = [1, x)
+    def _bfs(self, beginWord, endWord, wordList, e): # 🟥 DFS 大致有两种。(1) 填坑，step = 当前填哪一个坑，cur = [1, step) 的结果。(2) 走图, x = 现在在哪个坐标，e = [1, x)
         lvl = {beginWord} # q.push(s)
         wordList = set(wordList) # vis[s] = 1
         wordList -= lvl
