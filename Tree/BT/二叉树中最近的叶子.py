@@ -8,30 +8,12 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def _dfs(self, u, f, k, fa): 
-        fa[u] = f 
-        if u.val == k: return u
-        if u.left: return self._dfs(u.left, u, k, fa)
-        if u.right: return self._dfs(u.right, u, k, fa) 
-        
-    def closest_leaf(self, root: Optional[TreeNode], k: int):
-        fa = {}
-        k = self._dfs(root, None, k, fa)
-        q = [k]
-        vis = set([k]) 
+    def min_iterations_to_pass_info(self, root: Optional[TreeNode]):
+        q = [(root, 0)]
         while q:
-            now = q.pop(0)
-            if now.left is None and now.right is None: return now.val 
-            if now.left and now.left not in vis: 
-                q.append(now.left)
-                vis.add(now.left)
-            if now.right and now.right not in vis:
-                q.append(now.right)
-                vis.add(now.right)
-            nxt = fa[now]
-            if nxt and nxt not in vis:
-                q.append(nxt)
-                vis.add(nxt)
+            now, path = q.pop(0)
+            if now is None: return path
+            q.extend([(now.left, path + 1), (now.right, path + 1)]) 
             
 def build_BT(arr):
     if not arr:
@@ -53,9 +35,9 @@ def build_BT(arr):
 
 def main():
     solution = Solution()
-    root = build_BT([1,3,2])
+    root = build_BT([1,3,2,4])
     k = 1
-    out = solution.closest_leaf(root, k) 
+    out = solution.min_iterations_to_pass_info(root) 
     print(out)
 if __name__ == "__main__":
     main()

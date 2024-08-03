@@ -3,8 +3,7 @@ class ListNode:
     def __init__(self, val=0, next=None, pre=None):
         self.val = val
         self.next = next
-        self.pre = pre
-# DLL 模版 
+        self.pre = pre 
 class DLL:
     def __init__(self):
         self.head = None

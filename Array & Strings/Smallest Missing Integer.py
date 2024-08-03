@@ -9,13 +9,22 @@ class Solution:
             while j in s:
                 j += 1 # 爬楼梯，第一个不合法，即第一个楼梯断层处 
         return j   
-# s_b[mx[0]:mx[1] + 1].decode()
-
     
+    def bs(self, a): 
+        l = 0; r = len(a) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if a[mid] != mid:
+                ans = mid
+                r = mid - 1
+            else: l = mid + 1
+        return ans
+    
+        
 def main():
     solution = Solution()
-    arr = [0, 2, 1, 3, 5]
-    out = solution.get_different_number(arr)
+    arr = [0,1,2,3,5]
+    out = solution.bs(arr)
     print(out) 
 
 if __name__ == "__main__":
