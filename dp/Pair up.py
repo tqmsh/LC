@@ -13,12 +13,12 @@ def solve(a: List[int], b: List[int]) -> int:
     for i in range(2, n + 1): 
         dp[i][0] = a[i] + min(dp[i - 1][0], dp[i - 1][2])
         dp[i][1] = b[i] + min(dp[i - 1][0], dp[i - 1][1], dp[i - 1][2]) # b 联通快 不以 i 结尾
-        dp[i][2] = b[i] + b[i - 1] + min(dp[i - 2][0], dp[i - 2][1], dp[i - 2][2]) # b 联通快 以 i 结尾 
+        dp[i][2] = b[i] + dp[i - 1][1] # b 联通快 以 i 结尾  
     result = min(dp[n][0], dp[n][2]) 
     return result
 
 # Test the function with the given example
-a = [7, 3, 9, 1, 6, 5, 8, 4, 2, 10]
-b = [4, 8, 2, 7, 5, 6, 3, 9, 1, 7]
+a = [7, 3, 9, 1, 6, 4, 8, 4, 2, 10]
+b = [4, 8, 2, 7, 5, 3, 3, 9, 1, 7]
 
 print(solve(a, b))

@@ -11,20 +11,21 @@ class Solution:
         
         for x in courses:
             nt = t + x[0]
+            if pq: mx_duration_seen = -pq[0]
             if nt - 1 <= x[1]:
                 heappush(pq, -x[0])
                 t = nt
                 ans += 1
-            elif pq and pq[0] < -x[0] and nt + (pq[0]) - 1 <= x[1]: 
-                # 无后效, 某阶段的状态一旦确定，则此后过程的决策不再受此前各种状态及决策的影响
-                # 现在如果决定把以前最耗时间的拉出来 （如果有帮助的话），以后不受其影响，因为以前的课不能被重新学习，所以以后处理的也是一样的
-                nt += heappop(pq) # 拿最靠左
+            # t 能小则小
+            elif pq and mx_duration_seen > x[0] and nt - mx_duration_seen - 1 <= x[1]: # 撤回以前最耗时间的, 看看能不能把 t 变的最优
+                heappop(pq) # 撤回以前的，学习目前的
+                nt -= mx_duration_seen 
                 t = nt
                 heappush(pq, -x[0])
 
-        return ans
- 
+        return ans 
 
+        # 操作尊重无后效, 每个状态都是之前状态的一个计算结果
 
 def main(): 
     solution = Solution()  

@@ -12,8 +12,7 @@ class Solution:
         q = [(sx, sy, k, 0)]  
         vis.add((sx, sy, k, 0))
         while q:
-            now_x, now_y, now_k, now_step = q.pop(0) 
-            print(now_x, now_y)
+            now_x, now_y, now_k, now_step = q.pop(0)  
             if now_x == ex and now_y == ey: 
                 return now_step
 

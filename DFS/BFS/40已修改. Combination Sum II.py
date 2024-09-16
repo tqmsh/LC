@@ -1,48 +1,51 @@
-
-from typing import List 
+from typing import List, Deque
 from collections import deque
 
 class Solution: 
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         candidates = sorted(candidates) 
         combinations = []
-        
-        # dfs
-        def dfs(current_idx, current_run, current_sum):   
-            if current_sum == target:
-                combinations.append(current_run.copy())
-                return 
 
-            if current_idx >= len(candidates) or current_sum > target: 
-                return
-         
-            for i in range(current_idx + 1, len(candidates)):
-                if i > current_idx + 1 and candidates[i] == candidates[i - 1]: continue
-                current_run.append(candidates[i])  
-                dfs(i, current_run, current_sum + candidates[i])  
-                current_run.pop() # backtrack 
-
-        dfs(-1, [], 0) 
+        # Call dfs
+        self._dfs(0, [], 0, candidates, target, combinations)
 
         # bfs
-        combinations = []
-        queue = deque([(-1, [], 0)])  
-        def bfs():
-            while queue:
-                current_idx, current_run, current_sum = queue.pop()
-                if current_sum == target: 
-                    combinations.append(current_run.copy())
-                    continue  
-                
-                if current_idx >= len(candidates) or current_sum > target: 
-                    continue
-                
-                for i in range(current_idx + 1, len(candidates)): 
-                    if i > current_idx + 1 and candidates[i] == candidates[i - 1]: continue
-                    queue.extend([(i, current_run + [candidates[i]], current_sum + candidates[i])]) 
-        bfs()
+        combinations.clear()
+        queue = deque([(0, [], 0)])  
+        self._bfs(queue, candidates, target, combinations)
+        
         return combinations 
-    
+
+    def _dfs(self, now_idx, prev_combination, prev_sum, candidates, target, combinations):   
+        if prev_sum == target:
+            combinations.append(prev_combination.copy())
+            return 
+
+        if now_idx >= len(candidates) or prev_sum > target: 
+            return
+     
+        for i in range(now_idx, len(candidates)):
+            if i > now_idx and candidates[i] == candidates[i - 1]:
+                continue
+            prev_combination.append(candidates[i])  
+            self._dfs(i + 1, prev_combination, prev_sum + candidates[i], candidates, target, combinations)  
+            prev_combination.pop() # backtrack 
+
+    def _bfs(self, queue: Deque, candidates, target, combinations):
+        while queue:
+            now_idx, prev_combination, prev_sum = queue.pop()
+            if prev_sum == target: 
+                combinations.append(prev_combination.copy())
+                continue  
+            
+            if now_idx >= len(candidates) or prev_sum > target: 
+                continue
+            
+            for i in range(now_idx, len(candidates)): 
+                if i > now_idx and candidates[i] == candidates[i - 1]:
+                    continue
+                queue.extend([(i + 1, prev_combination + [candidates[i]], prev_sum + candidates[i])])
+
     
 def main(): 
     solution = Solution() 

@@ -21,7 +21,8 @@ class Solution:
                     res.add(cur)
         return res
 
-    def _bfs(self, beginWord, endWord, wordList, e): # 🟥 DFS 大致有两种。(1) 填坑，step = 当前填哪一个坑，path = [1, step) 的结果。(2) 走图, x = 现在在哪个坐标，e = [1, x)
+    def _bfs(self, beginWord, endWord, wordList, e): # 🟥 DFS 大致有两种。(1) 填坑，step = 当前填哪一个坑，path = [1, step) 的结果。
+                                                     #                  (2) 走图, x = 现在在哪个坐标，path = [0, x) 的拐弯情况，就是走到 x, 用的路径, i.e. nx, path + 'R', R 为 x -> nx
         lvl = {beginWord} # q.push(s)
         wordList = set(wordList) # vis[s] = 1
         wordList -= lvl

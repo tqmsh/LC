@@ -1,3 +1,27 @@
+from typing import List
+from collections import defaultdict, Counter
+def word_count_engine(document: str) -> List[List[str]]:
+    words = document.split(" ")
+    processed_words = [] 
+    idx = defaultdict(lambda: -1)
+    for i in range(len(words)):
+        
+        word = words[i]
+        word = word.lower() 
+        ans = ""
+        for j in range(len(word)): 
+            if not (word[j] in ["?",",",".", "'", "!", ":", ";"]): ans += word[j]
+        if ans is "": continue
+        processed_words.append(ans)
+        if idx[ans] == -1: idx[ans] = i
+    cnt = Counter(processed_words)
+    cnt = sorted(cnt.items(), key = lambda x: (-x[1], idx[x[0]]))
+    ans = []
+    for word, freq in cnt: ans.append([word, str(freq)])
+    return ans
+print(word_count_engine("Practice makes perfect, you'll get perfecT by practice. just practice! just just just!!"))
+
+
 import re
 from collections import Counter
 class Solution: 

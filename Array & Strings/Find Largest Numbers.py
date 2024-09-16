@@ -7,5 +7,4 @@ def find_largest(a, m):
         else: 
             if x > pq[0]: 
                 heapreplace(pq, x)
-    return sorted(pq)
-        
+    return sorted(pq) 

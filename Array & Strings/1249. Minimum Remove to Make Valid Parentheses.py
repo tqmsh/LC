@@ -15,12 +15,13 @@ class Solution:
                     ans += ch
             else:
                 ans += ch  
+
         ans = ans[::-1].replace('(', '', len(stk))[::-1] # 把结尾剩余的 ( 换掉
         return ans
 def main():
     solution = Solution()
     
-    s = "lee(t(c)o)de)"
+    s = "()(()"
     out = solution.minRemoveToMakeValid(s)
     print(out) 
 

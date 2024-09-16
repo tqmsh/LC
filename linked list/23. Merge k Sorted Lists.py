@@ -1,5 +1,5 @@
 # Question:
-# Given an array of k linked-lists, each sorted in ascending order, merge all the linked-lists into one
+# Given an array of k linked-lists, each sorted in ascending , merge all the linked-lists into one
 # sorted linked-list and return it.
 
 # Input:
