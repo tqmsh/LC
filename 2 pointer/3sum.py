@@ -22,6 +22,34 @@ class Solution:
                 elif sum < 0: l += 1
                 else: r -= 1 
         return ans
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        from collections import Counter
+from math import comb
+from typing import List
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]: 
+        f = Counter(nums) 
+        nums = sorted(list(set(nums))) 
+        result = []  
+        for i in range(len(nums)): 
+            l, r = i, len(nums) - 1 
+            while l <= r:
+                s = nums[i] + nums[l] + nums[r]   
+                if s == 0: 
+                    if i == l == r:
+                        if f[nums[i]] >= 3: result.append([nums[i], nums[i], nums[i]]) 
+                    elif i == l:
+                        if f[nums[i]] >= 2: result.append([nums[i], nums[i], nums[r]]) 
+                    elif l == r:
+                        if f[nums[l]] >= 2: result.append([nums[i], nums[l], nums[l]]) 
+                    else: result.append([nums[i], nums[l], nums[r]]) 
+                    l += 1
+                    r -= 1 
+                elif s < 0: l += 1   
+                else: r -= 1   
+        return result
+
 
 def main():
     solution = Solution()  
