@@ -2,6 +2,7 @@ from typing import List
 from collections import defaultdict  
 class Solution:
     def stoneGame(self, piles):
+        
         dp = defaultdict(int) 
 
         for i in range(len(piles)): dp[i, i] = piles[i]    

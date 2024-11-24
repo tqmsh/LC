@@ -6,7 +6,6 @@ class TrieNode:
         self.children = collections.defaultdict(TrieNode)
         self.x = x
 
-# Trie 模版
 class Trie:
     def __init__(self): self.root = TrieNode() 
     def insert(self, path, x):

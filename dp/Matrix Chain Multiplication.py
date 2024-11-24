@@ -2,6 +2,7 @@ from typing import List
 from collections import defaultdict  
 from itertools import accumulate
 def matrixChainMultiplication(a: List[List[int]]):
+        # 区间 dp 模版
         n = len(a); dp = [[0] * n for _ in range(n)]
         # dp[i][j]: [i, j] 合并最小代价
         

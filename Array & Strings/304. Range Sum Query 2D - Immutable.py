@@ -1,17 +1,33 @@
-class NumMatrix:
-    def __init__(self, matrix):
-        n, m = len(matrix), len(matrix[0]) 
-        # 1 index 2d arry 模版
-        matrix = [[0] * (m + 1)] + [[0] + row for row in matrix]  
-        self.sum = [[0] * (m + 1) for _ in range(n + 1)]
-        
-        for i in range(1, n + 1):
-            for j in range(1, m + 1):
-                self.sum[i][j] = self.sum[i-1][j] + self.sum[i][j-1] - self.sum[i-1][j-1] + matrix[i][j]  
+from typing import List
+from itertools import accumulate
+def min_differences(arr: List[int]) -> List[int]:
+    arr = [0] + arr; psa = list(accumulate(arr))
+    subarr = []
     
-    def sumRegion(self, row1, col1, row2, col2):
-        row1 += 1; col1 += 1; row2 += 1; col2 += 1
-        # 2d psa 模版
-        return self.sum[row2][col2] - self.sum[row2][col1 - 1] - self.sum[row1 - 1][col2] + self.sum[row1 - 1][col1 - 1]  
-obj = NumMatrix([[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]])
-print(obj.sumRegion(2, 1, 4, 3))
+    for L in range(1, len(arr)): # O(n (n + 1) / 2)
+        for R in range(L, len(arr)): subarr.append((psa[R] - psa[L - 1], L, R))
+    
+    # 排序
+    subarr.sort()
+
+    # 贪心，从小到大排个序，显然相邻的两个区间除去交集之后的部分就可以拿来更新，因为这两个区间变同样差距最小
+    # 正难则反，逆着维护，也就是根据区间来更新所有的合法 idx, 而不是枚举 idx，然后找相邻的两个区间
+
+    ans = [float('inf')] * len(arr)
+    for i in range(1, len(subarr)):
+        d1, L1, R1 = subarr[i - 1]; d2, L2, R2 = subarr[i]; d = abs(d2 - d1)
+        legal = [0] * len(arr)
+        for j in range(L1, R1 + 1): legal[j] ^= 1
+        for j in range(L2, R2 + 1): legal[j] ^= 1
+        for j in range(1, len(arr)):
+            if legal[j]: ans[j] = min(ans[j], d)
+    return ans[1:]
+
+    
+# 测试样例
+test_case1 = [2, -3]
+test_case2 = [3, -10, 4]
+
+# 输出测试
+print(min_differences(test_case1))  # 输出应为 [2, 3]
+print(min_differences(test_case2))  # 输出应为 [1, 6, 1]

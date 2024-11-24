@@ -1,3 +1,4 @@
+from typing import List
 class ATM:
     bank = [0] * 5
     val = [20, 50, 100, 200, 500]

@@ -15,8 +15,7 @@ class Solution:
             else:
                 root = root.left
         return ans
-
-# BST 模版
+ 
 def print_bst(node, level=0, label='.'):
     indent = '   ' * level
     if node is not None:

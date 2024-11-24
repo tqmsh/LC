@@ -4,8 +4,7 @@ from collections import deque
 
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> bool: 
-        # dfs 
-        # 判环 模版 
+        # dfs  
         inn = [0] * numCourses
         e = [[] for _ in range(numCourses)]
         

@@ -19,11 +19,12 @@ class Solution:
             for i in range(min(len(s), len(t))):
                 u = s[i]; v = t[i]
                 if u != v: 
+                    print(u, v)
                     e[u].append(v)
                     inn[v] += 1
                     break 
             else: # else block runs only if the for loop finishes without hitting the break
-                if len(s) > len(t): return 0
+                if len(s) > len(t): return 0 
         return 1
     def alienOrder(self, words: List[str]) -> str:
         letters = {c for word in words for c in word} 
